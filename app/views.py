@@ -38,3 +38,12 @@ def undo(todo_id):
     
     todos = ToDo.objects.all()
     return render_template("index.html", todos=todos)
+
+
+@app.route('/delete/<string:todo_id>')
+def delete(todo_id):
+    todo = ToDo.objects.get_or_404(id=todo_id)
+    todo.delete()
+    
+    todos = ToDo.objects.all()
+    return render_template("index.html", todos=todos)
