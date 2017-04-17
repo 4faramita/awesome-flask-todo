@@ -21,6 +21,13 @@
             <td>{{ t.content }}</td>
             <td>{{ t.time }}</td>
             <td>{{ t.status }}</td>
+            <td>
+                {% if t.status == 0 %}
+                <a href="/do/{{ t.id }}" class="btn btn-primary">Do it</a> 
+                {% else %}
+                <a href="/undo/{{ t.id }}" class="btn btn-primary">Undo it</a> 
+                {% endif %}
+            </td>
         </tr>
         {% endfor %}
     </tbody>
