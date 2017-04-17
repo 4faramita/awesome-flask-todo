@@ -6,7 +6,7 @@ from app.models import ToDo
 
 @app.route('/')
 def index():
-    todos = ToDo.objects.all()
+    todos = ToDo.objects.order_by('-time')
     return render_template('index.html', todos=todos)
 
 

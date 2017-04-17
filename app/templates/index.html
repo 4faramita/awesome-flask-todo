@@ -7,29 +7,47 @@
     </span>
 </form>
 
-<table class="table">
-    <thead>
-        <tr>
-            <td>Content</td>
-            <td>Time</td>
-            <td>Status</td>
-        </tr>
-    </thead>
-    <tbody>
-        {% for t in todos %}
-        <tr>
-            <td>{{ t.content }}</td>
-            <td>{{ t.time }}</td>
-            <td>{{ t.status }}</td>
-            <td>
+<div>
+    <h2>To-Do List</h2>
+    {% if todos %}
+        <table class="table">
+            <thead>
+            <tr>
+                <td>Content</td>
+                <td>Time</td>
+                <td>Status</td>
+                <td>Operation</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for t in todos %}
                 {% if t.status == 0 %}
-                <a href="/do/{{ t.id }}" class="btn btn-primary">Do it</a> 
+                    <tr class="info">
+                        <td>{{ t.content }}</td>
+                        <td>{{ t.time.strftime('%H:%M %Y-%m-%d') }}</td>
+                        <td>To Do</td>
+                        <td>
+                            <a href="/do/{{ t.id }}" class="btn btn-primary">Do</a>
+                        </td>
+                        <td>
+                            <a href="/delete/{{ t.id }}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
                 {% else %}
-                <a href="/undo/{{ t.id }}" class="btn btn-primary">Undo it</a> 
+                    <tr class="danger">
+                        <td id="center">{{ t.content }}</td>
+                        <td>{{ t.time.strftime('%H:%M %Y-%m-%d') }}</td>
+                        <td> Done</td>
+                        <td>
+                            <a href="/undo/{{ t.id }}" class="btn btn-primary">Undo</a>
+                        </td>
+                        <td>
+                            <a href="/delete/{{ t.id }}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
                 {% endif %}
-            </td>
-            <td><a href="/delete/{{ t.id }}" class="btn btn-danger">Delete it</a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</div>

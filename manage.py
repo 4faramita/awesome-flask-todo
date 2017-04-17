@@ -7,10 +7,12 @@ from app.models import ToDo
 
 manager = Manager(app)
 
+
 @manager.command
 def save_todo():
     todo = ToDo(content='My first todo!')
     todo.save()
+
 
 manager.add_command(
     'runserver',
